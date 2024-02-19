@@ -5,21 +5,32 @@
 #include <stdlib.h>
 
 int main() {
-	struct Cube* e = identity_cube();
+	struct Cube* id = identity_cube();
+	struct Cube* cube = identity_cube();
 
 	printf("Identity cube:\n");
 	
-	print_cube(e);
+	print_cube(cube);
 
-	apply_f(e);
-	apply_t(e);
-	apply_r(e);
+	int k = 0;
+	while (1) {
+		apply_f(cube);
+		apply_t(cube);
+		apply_r(cube);
 
-	printf("Applied rotations:\n");
+		k++;
+
+		if (check_cubes_equal(cube, id)) {
+			break;
+		}
+	}
 	
-	print_cube(e);
+	printf("Applied ftr %d times:\n", k);
+	
+	print_cube(cube);
 
-	free(e);
+	free(cube);
+	free(id);
 	
 	return 0;
 }
